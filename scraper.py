@@ -24,9 +24,9 @@ def rarityConv(rarity, price):
     elif rarity == 'Super Rare':
         factor = 2
     elif rarity == 'Ultra Rare' or "Premium Gold Rare":
-        factor = 6
+        factor = 16
     elif rarity == 'Secret Rare':
-        factor = 20
+        factor = 50
     else:
         factor = 15
     return price/factor
