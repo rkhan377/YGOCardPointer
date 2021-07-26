@@ -3,14 +3,14 @@ from bs4 import BeautifulSoup
 
 
 def checkBL(card, blList):
-    if card.upper in blList:
+    if str(card).upper() in blList:
         i = 0
         while i < len(blList):
-            if blList[i] == card.upper():
+            if blList[i] == str(card).upper():
                 if blList.index("Semi-Limited List:") < i:
-                    return 25 #"semi"
+                    return 5 #"semi"
                 elif blList.index("Limited List:") < i:
-                    return 50 #"limited"
+                    return 10 #"limited"
                 else:
                     return 100 #"forbidden"
             i += 1
@@ -24,9 +24,9 @@ def rarityConv(rarity, price):
     elif rarity == 'Super Rare':
         factor = 2
     elif rarity == 'Ultra Rare' or "Premium Gold Rare":
-        factor = 16
+        factor = 6
     elif rarity == 'Secret Rare':
-        factor = 50
+        factor = 20
     else:
         factor = 15
     return price/factor
@@ -66,7 +66,7 @@ def point(deckList, blList):
     i = 0
     while i < len(deckList):
         card = soupString(deckList[i])
-        priceAdj = rarityConv(scrapeRarity(card), scrapePrice(card))*checkBL(card, blList)
+        priceAdj = rarityConv(scrapeRarity(card), scrapePrice(card))*checkBL(deckList[i], blList)
         finalPoints = round((priceAdj/.2)/10)
         deckList[i] = deckList[i]+" - "+str(finalPoints)
         i+=1
