@@ -24,6 +24,9 @@ def deckInput():
             except:
                 print(deckName + " does not exist.")
                 deckName = ''
+        else:
+            print("\nBye!")
+            quit()
 
     i = 0
     while i < len(listTxt):
